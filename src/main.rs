@@ -1,6 +1,7 @@
 use std::fs;
 use std::io;
 use std::path::Path;
+use zip::ZipArchive;
 
 fn main() {
     std::process::exit(real_main());
@@ -17,7 +18,7 @@ fn real_main() -> i32 {
     let fname = Path::new(&*args[1]);
     let file = fs::File::open(&fname).unwrap();
 
-    let mut archive = zip::ZipArchive::new(file).unwrap();
+    let mut archive = ZipArchive::new(file).unwrap();
 
     for i in 0..archive.len() {
         let mut file = archive.by_index(i).unwrap();
